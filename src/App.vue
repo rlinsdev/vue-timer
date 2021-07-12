@@ -1,12 +1,28 @@
 <template>
-<h1>Reaction test</h1>
+  <h1>Reaction test</h1>
+  <button @click="start" :disabled="isPlaying">Play</button>
+  <block v-if="isPlaying" :delay="delay" />
 </template>
 
 <script>
+import block from './components/Block.vue'
 
 export default {
   name: 'App',
-  components: { }
+  components: { block },
+  data () {
+    return {
+      isPlaying: false,
+      delay: 1
+    }
+  },
+  methods:{
+    start() {
+      this.delay = 2000
+      this.isPlaying = true
+      console.log(this.delay)
+    }
+  }
 }
 </script>
 
