@@ -1,7 +1,9 @@
 <template>
   <h1>Reaction test</h1>
   <button @click="start" :disabled="isPlaying">Play</button>
-  <block v-if="isPlaying" :delay="delay" />
+  <block v-if="isPlaying" :delay="delay" @end="endGame" />
+  <p v-if="showResults">Reaction time: {{score}} ms</p>
+  
 </template>
 
 <script>
@@ -13,14 +15,22 @@ export default {
   data () {
     return {
       isPlaying: false,
-      delay: 1
+      delay: null,
+      score:null,
+      showResults: false
     }
   },
   methods:{
     start() {
-      this.delay = 2000
+      this.delay = 2000 + Math.random() * 5000
       this.isPlaying = true
-      console.log(this.delay)
+      this.showResults = false
+      //console.log(this.delay)
+    },
+    endGame(reactionTime) {
+      this.score = reactionTime
+      this.isPlaying = false
+      this.showResults = true
     }
   }
 }
