@@ -2,16 +2,16 @@
   <h1>Reaction test</h1>
   <button @click="start" :disabled="isPlaying">Play</button>
   <block v-if="isPlaying" :delay="delay" @end="endGame" />
-  <p v-if="showResults">Reaction time: {{score}} ms</p>
-  
-</template>
+  <results v-if="showResults" :score="score" />
+  </template>
 
 <script>
 import block from './components/Block.vue'
+import results from './components/Results.vue'
 
 export default {
   name: 'App',
-  components: { block },
+  components: { block, results },
   data () {
     return {
       isPlaying: false,
